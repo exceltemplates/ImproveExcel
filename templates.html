@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Templates Library - ExcelFinance Pro</title>
+    <meta name="description" content="Browse our complete library of professional Excel finance templates. Budgeting, investment tracking, accounting, tax preparation, and business planning solutions.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    
+    <!-- Custom Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-navy: #1a2332;
+            --primary-gold: #d4af37;
+            --accent-green: #87a96b;
+            --neutral-gray: #f8f9fa;
+            --text-charcoal: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .template-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .template-card:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .filter-sidebar {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .price-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: #e2e8f0;
+            outline: none;
+        }
+        
+        .price-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-gold);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .price-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-gold);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .category-filter {
+            transition: all 0.3s ease;
+        }
+        
+        .category-filter:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-filter.active {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, #f4d03f 100%);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .breadcrumb {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-display font-bold text-gray-900">ExcelFinance Pro</h1>
+                    </div>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="templates.html" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">Templates</a>
+                        <a href="about.html" class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">About</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="cart-toggle" class="relative p-2 text-gray-600 hover:text-blue-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9m-9 0V19a2 2 0 002 2h7a2 2 0 002-2v-4"/>
+                        </svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <button class="md:hidden p-2 text-gray-600 hover:text-blue-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="pt-24 pb-12 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="breadcrumb rounded-xl p-4 mb-8 inline-block">
+                <nav class="flex items-center space-x-2 text-sm">
+                    <a href="index.html" class="text-gray-600 hover:text-blue-600">Home</a>
+                    <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="text-gray-900 font-medium">Templates</span>
+                </nav>
+            </div>
+            
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
+                    Template Library
+                </h1>
+                <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+                    Discover our complete collection of professional Excel finance templates. 
+                    Each template is carefully crafted to solve specific financial challenges.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Filter Sidebar -->
+                <div class="lg:w-1/4">
+                    <div class="filter-sidebar rounded-xl p-6 sticky top-24">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-6">Filter Templates</h3>
+                        
+                        <!-- Search -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Search</label>
+                            <input type="text" id="search-input" placeholder="Search templates..." 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        
+                        <!-- Categories -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Categories</label>
+                            <div class="space-y-2">
+                                <button class="category-filter w-full text-left px-3 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors" data-category="Budgeting">
+                                    <div class="flex items-center justify-between">
+                                        <span>Budgeting</span>
+                                        <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">12</span>
+                                    </div>
+                                </button>
+                                
+                                <button class="category-filter w-full text-left px-3 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors" data-category="Investment">
+                                    <div class="flex items-center justify-between">
+                                        <span>Investment</span>
+                                        <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">8</span>
+                                    </div>
+                                </button>
+                                
+                                <button class="category-filter w-full text-left px-3 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors" data-category="Accounting">
+                                    <div class="flex items-center justify-between">
+                                        <span>Accounting</span>
+                                        <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">15</span>
+                                    </div>
+                                </button>
+                                
+                                <button class="category-filter w-full text-left px-3 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors" data-category="Tax">
+                                    <div class="flex items-center justify-between">
+                                        <span>Tax</span>
+                                        <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">6</span>
+                                    </div>
+                                </button>
+                                
+                                <button class="category-filter w-full text-left px-3 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors" data-category="Business Planning">
+                                    <div class="flex items-center justify-between">
+                                        <span>Business Planning</span>
+                                        <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">10</span>
+                                    </div>
+                                </button>
+                            </div>
+                            
+                            <button id="clear-filters" class="w-full mt-3 text-sm text-blue-600 hover:text-blue-800 font-medium">
+                                Clear All Filters
+                            </button>
+                        </div>
+                        
+                        <!-- Price Range -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Price Range</label>
+                            <input type="range" id="price-slider" min="0" max="200" value="200" 
+                                   class="price-slider w-full mb-2">
+                            <div class="flex items-center justify-between text-sm text-gray-600">
+                                <span>$0</span>
+                                <span id="price-value">$200</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Sort Options -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
+                            <select id="sort-select" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="popular">Most Popular</option>
+                                <option value="rating">Highest Rated</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="newest">Newest First</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Active Filters -->
+                        <div id="active-filters" class="hidden">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Active Filters</label>
+                            <div id="filter-tags" class="flex flex-wrap gap-2">
+                                <!-- Active filter tags will appear here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Templates Grid -->
+                <div class="lg:w-3/4">
+                    <!-- Results Header -->
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-900">All Templates</h2>
+                            <p class="text-gray-600 mt-1">
+                                <span id="results-count">15</span> templates found
+                            </p>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <button id="grid-view" class="p-2 text-gray-600 hover:text-blue-600 rounded-lg bg-gray-100">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                                </svg>
+                            </button>
+                            
+                            <button id="list-view" class="p-2 text-gray-400 hover:text-blue-600 rounded-lg">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Templates Grid -->
+                    <div id="templates-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                        <!-- Templates will be loaded by JavaScript -->
+                    </div>
+                    
+                    <!-- Load More Button -->
+                    <div class="text-center mt-12">
+                        <button id="load-more" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors hidden">
+                            Load More Templates
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-display font-bold mb-4">ExcelFinance Pro</h3>
+                <p class="text-gray-400 mb-6 max-w-2xl mx-auto">
+                    Professional Excel finance templates for individuals and businesses. 
+                    Transform your financial management with our proven solutions.
+                </p>
+                
+                <div class="border-t border-gray-800 pt-6">
+                    <p class="text-gray-500 text-sm">
+                        © 2025 ExcelFinance Pro. All rights reserved. 
+                        Built with precision for financial excellence.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50">
+        <div class="p-6 border-b">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-semibold">Shopping Cart</h3>
+                <button id="cart-close" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto p-6">
+            <div id="cart-items" class="space-y-4">
+                <!-- Cart items will be loaded here -->
+            </div>
+        </div>
+        
+        <div class="border-t p-6">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-lg font-semibold">Total:</span>
+                <span id="cart-total" class="text-xl font-bold text-blue-600">$0.00</span>
+            </div>
+            <button class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Template Modal -->
+    <div id="template-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal-overlay">
+        <div id="modal-content">
+            <!-- Modal content will be loaded here -->
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all templates
+            window.marketplace.renderTemplates();
+            
+            // Price slider functionality
+            const priceSlider = document.getElementById('price-slider');
+            const priceValue = document.getElementById('price-value');
+            
+            priceSlider.addEventListener('input', function() {
+                priceValue.textContent = '$' + this.value;
+            });
+            
+            // Clear filters
+            document.getElementById('clear-filters').addEventListener('click', function() {
+                window.marketplace.currentFilters = {
+                    categories: [],
+                    priceRange: [0, 200],
+                    search: ''
+                };
+                
+                document.getElementById('search-input').value = '';
+                priceSlider.value = 200;
+                priceValue.textContent = '$200';
+                
+                document.querySelectorAll('.category-filter').forEach(filter => {
+                    filter.classList.remove('active');
+                });
+                
+                window.marketplace.filterTemplates();
+            });
+            
+            // Update results count
+            function updateResultsCount() {
+                const visibleCards = document.querySelectorAll('.template-card:not([style*="display: none"])');
+                document.getElementById('results-count').textContent = visibleCards.length;
+            }
+            
+            // Override filterTemplates to update count
+            const originalFilter = window.marketplace.filterTemplates;
+            window.marketplace.filterTemplates = function() {
+                originalFilter.call(this);
+                setTimeout(updateResultsCount, 100);
+            };
+            
+            // Cart close functionality
+            document.getElementById('cart-close').addEventListener('click', () => {
+                document.getElementById('cart-sidebar').classList.add('translate-x-full');
+            });
+            
+            // Initial count
+            updateResultsCount();
+        });
+    </script>
+</body>
+</html>
